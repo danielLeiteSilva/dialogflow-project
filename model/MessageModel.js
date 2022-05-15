@@ -6,19 +6,14 @@ class MessageController {
     message(req, res) {
 
         const action = req.body.queryResult.action
+        const parameters = req.body.queryResult.parameters
+        
         const fullFillment = new FullFillmentModel()
         const text = new TextModel()
 
-        if(action == "input.hour"){
-            
-        }
-
-       
-        // text.setTextObject(["ola", "oi"])
-        // fullFillment.setObjectText(text)
         
-        return res.status(200).json({ ...fullFillment })
 
+        return res.status(200).json({ ...fullFillment })
 
     }
 

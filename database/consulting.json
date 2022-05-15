@@ -1,3 +1,9 @@
 [
-    
+    {
+        "id": 1,
+        "idEspecialista": 1,
+        "idHorario": 1,
+        "idData": 1,
+        "idFilial": 1
+    }
 ]
