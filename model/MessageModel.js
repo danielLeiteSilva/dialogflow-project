@@ -9,11 +9,11 @@ class MessageController {
         const parameters = req.body.queryResult.parameters
         
         let [ especialist, idEspecialista ] = parameters.especialista.split(",")
-        let [ local, idLocal ] = parameters.local
+        let [ local, idLocal ] = parameters.local.split(",")
         let dateAgendament = new Date(parameters.data)
         let hourAgendament = new Date(parameters.hour)
 
-        console.log(idEspecialista, idLocal, dateAgendament, hourAgendament)
+        console.log(idEspecialista, idLocal, dateAgendament, hourAgendament.getHours())
 
 
         const fullFillment = new FullFillmentModel()
