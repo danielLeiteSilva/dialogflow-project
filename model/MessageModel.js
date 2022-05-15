@@ -8,6 +8,14 @@ class MessageController {
         const action = req.body.queryResult.action
         const parameters = req.body.queryResult.parameters
         
+        let [ especialist, idEspecialista ] = parameters.especialista.split(",")
+        let [ local, idLocal ] = parameters.local
+        let dateAgendament = new Date(parameters.data)
+        let hourAgendament = new Date(parameters.hour)
+
+        console.log(idEspecialista, idLocal, dateAgendament, hourAgendament)
+
+
         const fullFillment = new FullFillmentModel()
         const text = new TextModel()
 
