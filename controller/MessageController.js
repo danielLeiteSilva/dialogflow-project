@@ -9,7 +9,7 @@ class MessageController {
             messageModel.message(req, res)
 
         } catch (error) {
-            res.status(400).json({ error, statusCode: 400 })
+            res.status(400).json({ error: error, statusCode: 400 })
         }
     }
 }
