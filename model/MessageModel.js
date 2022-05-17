@@ -48,7 +48,6 @@ class MessageModel {
             RegisterFileModel.registerInFile(register, Data.getConsultingData())
             text.setTextObject(response.toString())
             fullFillment.setObjectText(text)
-            followupEventInput.setNameObject("dados")
 
         } else {
 
@@ -67,10 +66,9 @@ class MessageModel {
                 RegisterFileModel.registerInFile(register, Data.getConsultingData())
                 text.setTextObject(response.toString())
                 fullFillment.setObjectText(text)
-                followupEventInput.setNameObject("dados")
             }
         }
-        return { ...fullFillment }
+        return { ...fullFillment, ...followupEventInput}
     }
 }
 
