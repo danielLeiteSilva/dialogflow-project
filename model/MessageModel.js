@@ -18,6 +18,8 @@ class MessageController {
         const followupEventInput = new FollowupEventInput()
         const text = new TextModel()
         
+        console.log(JSON.parse(req))
+
         const parameters = req.body.queryResult.parameters
 
         let [especialist, idEspecialista] = parameters.especialista.split(",")
