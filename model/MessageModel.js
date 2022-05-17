@@ -1,10 +1,13 @@
-const path = require("path")
+//Utils
+const utils = require('../utils/utils')
+//Models
 const FullFillmentModel = require("./FullFillmentModel")
 const TextModel = require("./TextModel")
-const utils = require('../utils/utils')
 const RegisterModel = require("./RegisterModel")
-const Register = require("./Register")
 const ResponseModel = require("./ResponseModel")
+//static instances
+const Register = require("./Register")
+const Data = require("../data/Data.js")
 
 class MessageController {
 
@@ -21,20 +24,13 @@ class MessageController {
         let [hour, idHour] = parameters.horario.split(",")
         let dateAgendamentComplete = utils.getDateAgendament(dateAgendament)
 
-        // Read files
-        let date = utils.readFile(path.join(__dirname, '..', 'database', 'date.json'))
-        let consultingFile = utils.readFile(path.join(__dirname, '..', 'database', 'consulting.json'))
-        let especialistData = utils.readFile(path.join(__dirname, '..', 'database', 'especialist.json'))
-        let filiaisData = utils.readFile(path.join(__dirname, '..', 'database', 'filiais.json'))
-        let hoursData = utils.readFile(path.join(__dirname, '..', 'database', 'hours.json'))
-
-        let idDate = date.find(element => element.date == dateAgendamentComplete).id
-
+        let idDate = Data.getDateData().find(element => element.date == dateAgendamentComplete).id      
+        
         let register = new RegisterModel(
             idEspecialista,
             idLocal,
             dateAgendamentComplete,
-            date,
+            Data.getDateData(),
             idHour
         )
         let response = new ResponseModel(
@@ -42,27 +38,27 @@ class MessageController {
             idDate,
             idHour,
             idLocal,
-            especialistData,
-            date,
-            hoursData,
-            filiaisData)
+            Data.getEspecialistData(),
+            Data.getDateData(),
+            Data.getHoursData(),
+            Data.getFiliaisData())
 
-        if (consultingFile.length == 0) {
-            Register.registerInFile(register, consultingFile)
+        if (Data.getConsultingData().length == 0) {
+            Register.registerInFile(register, Data.getConsultingData())
             text.setTextObject(response.toString())
             fullFillment.setObjectText(text)
+            
         } else {
-            let isOcupped = consultingFile.find(element =>
+            let isOcupped = Data.getConsultingData().find(element =>
                 element.idDate === parseInt(idDate)
                 && element.idLocal === parseInt(idLocal)
                 && element.idHour === parseInt(idHour)
                 && element.idEspecialista === parseInt(idEspecialista))
-
             if (isOcupped) {
                 text.setTextObject("Desculpe, não foi possível agendar essa consulta!")
                 fullFillment.setObjectText(text)
             } else {
-                Register.registerInFile(register, consultingFile)
+                Register.registerInFile(register, Data.getConsultingData())
                 text.setTextObject(response.toString())
                 fullFillment.setObjectText(text)
             }

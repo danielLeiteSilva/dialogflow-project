@@ -2,12 +2,10 @@ const MessageModel = require("../model/MessageModel")
 
 class MessageController {
 
-    message(req, res) {
+    execute(req, res) {
         try {
-            
             const messageModel = new MessageModel()
             messageModel.message(req, res)
-
         } catch (error) {
             res.status(400).json({ error: error, statusCode: 400 })
         }
