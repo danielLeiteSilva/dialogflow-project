@@ -70,7 +70,7 @@ class MessageModel {
                 followupEventInput.setNameObject("dados")
             }
         }
-        return { ...fullFillment, ...followupEventInput }
+        return { ...fullFillment }
     }
 }
 
