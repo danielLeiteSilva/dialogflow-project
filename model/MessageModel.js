@@ -46,10 +46,8 @@ class MessageController {
             Data.getFiliaisData())
 
         if (Data.getConsultingData().length == 0) {
-            
+
             Register.registerInFile(register, Data.getConsultingData())
-            text.setTextObject(response.toString())
-            fullFillment.setObjectText(text)
             followupEventInput.setNameObject("dados")
 
         } else {
@@ -61,18 +59,14 @@ class MessageController {
                 && element.idEspecialista === parseInt(idEspecialista))
 
             if (isOcupped) {
-                text.setTextObject("Desculpe, não foi possível agendar essa consulta!")
-                fullFillment.setObjectText(text)
                 followupEventInput.setNameObject("marcar")
 
             } else {
                 Register.registerInFile(register, Data.getConsultingData())
-                text.setTextObject(response.toString())
-                fullFillment.setObjectText(text)
                 followupEventInput.setNameObject("dados")
             }
         }
-        return res.status(200).json({ ...fullFillment, ...followupEventInput })
+        return { ...fullFillment, ...followupEventInput }
     }
 }
 
