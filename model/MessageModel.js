@@ -23,6 +23,10 @@ class MessageModel {
         let dateAgendament = new Date(parameters.data)
         let [hour, idHour] = parameters.horario.split(",")
         let dateAgendamentComplete = utils.getDateAgendament(dateAgendament)
+        let tutor = parameters.tutor.name
+        let animal = parameters.animal
+        let telefone = parameters.telefone
+        let protocol = Math.floor(Math.random() * 655368462);
 
         let idDate = Data.getDateData().find(element => element.date == dateAgendamentComplete).id      
         
@@ -38,6 +42,10 @@ class MessageModel {
             idDate,
             idHour,
             idLocal,
+            animal, 
+            telefone, 
+            tutor, 
+            protocol,
             Data.getEspecialistData(),
             Data.getDateData(),
             Data.getHoursData(),
