@@ -5,20 +5,18 @@ const FullFillmentModel = require("./FullFillmentModel")
 const TextModel = require("./TextModel")
 const RegisterModel = require("./RegisterModel")
 const ResponseModel = require("./ResponseModel")
-const FollowupEventInput = require("../model/FollowupEventInputModel")
+const FollowupEventInputModel = require("../model/FollowupEventInputModel")
 //static instances
-const Register = require("./Register")
+const RegisterFileModel = require("./RegisterFileModel")
 const Data = require("../data/Data.js")
 
-class MessageController {
+class MessageModel {
 
-    message(req, res) {
+    message(parameters) {
 
         const fullFillment = new FullFillmentModel()
-        const followupEventInput = new FollowupEventInput()
+        const followupEventInput = new FollowupEventInputModel()
         const text = new TextModel()
-        
-        const parameters = req.body.queryResult.parameters
 
         let [especialist, idEspecialista] = parameters.especialista.split(",")
         let [local, idLocal] = parameters.local.split(",")
@@ -47,7 +45,7 @@ class MessageController {
 
         if (Data.getConsultingData().length == 0) {
 
-            Register.registerInFile(register, Data.getConsultingData())
+            RegisterFileModel.registerInFile(register, Data.getConsultingData())
             text.setTextObject(response.toString())
             fullFillment.setObjectText(text)
             followupEventInput.setNameObject("dados")
@@ -66,7 +64,7 @@ class MessageController {
                 followupEventInput.setNameObject("marcar")
 
             } else {
-                Register.registerInFile(register, Data.getConsultingData())
+                RegisterFileModel.registerInFile(register, Data.getConsultingData())
                 text.setTextObject(response.toString())
                 fullFillment.setObjectText(text)
                 followupEventInput.setNameObject("dados")
@@ -76,4 +74,4 @@ class MessageController {
     }
 }
 
-module.exports = MessageController
+module.exports = MessageModel

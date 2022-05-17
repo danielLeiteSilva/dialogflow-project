@@ -1,12 +1,13 @@
 const MessageModel = require("../model/MessageModel")
+const messageModel = new MessageModel()
 
 class MessageController {
 
     execute(req, res) {
         try {
             
-            const messageModel = new MessageModel()
-            let result = messageModel.message(req, res)
+            const parameters = req.body.queryResult.parameters
+            let result = messageModel.message(parameters)
             res.status(200).json(result)
 
         } catch (error) {
