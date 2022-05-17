@@ -1,18 +1,18 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "name": "Clínico geral"
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "Urologista"
     },
     {
-        "id": "3",
+        "id": 3,
         "name": "Ortopedista"
     },
     {
-        "id": "4",
+        "id": 4,
         "name": "Dentista"
     }
 ]
